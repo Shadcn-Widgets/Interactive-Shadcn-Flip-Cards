@@ -2,7 +2,7 @@
 
 A beautiful and interactive statistical card component for your Shadcn UI dashboard that features a smooth flip animation to reveal detailed charts.
 
-[Click Here to see the demo](https://shadcn-widgets.xyz/demo/interactive-flip-cards-with-statistical-charts)
+[Click Here to see the demo](https://shadcn-widgets.xyz/widget/interactive-flip-cards-with-statistical-charts)
 
 ## Features
 
