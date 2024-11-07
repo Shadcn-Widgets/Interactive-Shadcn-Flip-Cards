@@ -42,42 +42,59 @@ pnpm add @react-spring/web recharts lucide-react
 ## Usage
 
 ```tsx
+"use client";
+
 import StatCard from "./stat-card";
 import { DollarSign } from "lucide-react";
 
-const revenueData = [
-  { date: "2024-01-01", value: 10 },
-  { date: "2024-02-01", value: 20 },
-  { date: "2024-03-01", value: 30 },
-];
+export default function Home() {
+  const revenueData = useMemo(() => {
+    return [
+      { date: "2024-01-01", value: 10 },
+      { date: "2024-02-01", value: 20 },
+      { date: "2024-03-01", value: 30 },
+    ];
+  }, []);
 
-<StatCard
-  title="Revenue"
-  value={50}
-  prefix="$"
-  icon={<DollarSign />}
-  change={-2.5}
-  chartData={revenueData}
-  chartColor="#8D6A9F"
-  gradient="from-[#E53D00] to-[#FFE900] dark:from-[#CC3700] dark:to-[#E6D100]"
-  progress={0.5}
-/>;
+  const menuItems = useMemo(() => {
+    return [
+      { label: "View Details", onClick: () => {} },
+      { label: "Edit", onClick: () => {} },
+    ];
+  }, []);
+
+  return (
+    <StatCard
+      title="Revenue"
+      value={50}
+      prefix="$"
+      icon={<DollarSign />}
+      change={-2.5}
+      chartData={revenueData}
+      chartColor="#8D6A9F"
+      gradient="from-[#E53D00] to-[#FFE900] dark:from-[#CC3700] dark:to-[#E6D100]"
+      progress={0.5}
+      menuItems={menuItems}
+    />
+  );
+}
 ```
 
 ## Props
 
-| Prop         | Type               | Description                                  |
-| ------------ | ------------------ | -------------------------------------------- |
-| `title`      | `string`           | The title of the stat card                   |
-| `value`      | `number`           | The main value to display                    |
-| `prefix`     | `string`           | Optional prefix for the value (e.g., "$")    |
-| `suffix`     | `string`           | Optional suffix for the value (e.g., "%")    |
-| `icon`       | `ReactNode`        | Icon component to display                    |
-| `change`     | `number`           | Percentage change (positive or negative)     |
-| `chartData`  | `ChartDataPoint[]` | Array of data points for the chart           |
-| `chartColor` | `string`           | Primary color for the chart                  |
-| `gradient`   | `string`           | Tailwind gradient classes for the background |
-| `progress`   | `number`           | Progress value between 0 and 1               |
+| Prop         | Type                                          | Description                                  |
+| ------------ | --------------------------------------------- | -------------------------------------------- |
+| `title`      | `string`                                      | The title of the stat card                   |
+| `value`      | `number`                                      | The main value to display                    |
+| `prefix`     | `string`                                      | Optional prefix for the value (e.g., "$")    |
+| `suffix`     | `string`                                      | Optional suffix for the value (e.g., "%")    |
+| `icon`       | `ReactNode`                                   | Icon component to display                    |
+| `change`     | `number`                                      | Percentage change (positive or negative)     |
+| `chartData`  | `ChartDataPoint[]`                            | Array of data points for the chart           |
+| `chartColor` | `string`                                      | Primary color for the chart                  |
+| `gradient`   | `string`                                      | Tailwind gradient classes for the background |
+| `progress`   | `number`                                      | Progress value between 0 and 1               |
+| `menuItems`  | `Array<{label: string, onClick: () => void}>` | Optional dropdown menu items with callbacks  |
 
 ## Features in Detail
 
@@ -112,3 +129,7 @@ Built with:
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Follow Us
+
+- [X (formerly Twitter)](https://x.com/ShadcnWidgets)

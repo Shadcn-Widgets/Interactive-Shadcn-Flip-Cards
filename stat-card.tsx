@@ -35,6 +35,10 @@ type StatCardProps = {
   chartColor: string;
   gradient: string;
   progress: number;
+  menuItems?: {
+    label: string;
+    onClick: () => void;
+  }[];
 };
 
 function lightenHexColor(hex: string, percent: number): string {
@@ -71,6 +75,7 @@ export default function StatCard({
   chartColor,
   gradient,
   progress,
+  menuItems,
 }: StatCardProps) {
   const isPositive = change >= 0;
   const ChangeIcon = isPositive ? TrendingUp : TrendingDown;
@@ -209,21 +214,28 @@ export default function StatCard({
               <h3 className="text-lg font-semibold text-white uppercase">
                 {title} Trend
               </h3>
-              <div ref={menuRef}>
-                <DropdownMenu onOpenChange={setIsDropdownOpen}>
-                  <DropdownMenuTrigger asChild>
-                    <button className="p-2 text-white hover:bg-white hover:bg-opacity-10 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50">
-                      <MoreVertical className="h-5 w-5" />
-                      <span className="sr-only">Open menu</span>
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem>View Details</DropdownMenuItem>
-                    <DropdownMenuItem>Export Data</DropdownMenuItem>
-                    <DropdownMenuItem>Set Alert</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
+              {menuItems && (
+                <div ref={menuRef}>
+                  <DropdownMenu onOpenChange={setIsDropdownOpen}>
+                    <DropdownMenuTrigger asChild>
+                      <button className="p-2 text-white hover:bg-white hover:bg-opacity-10 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50">
+                        <MoreVertical className="h-5 w-5" />
+                        <span className="sr-only">Open menu</span>
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      {menuItems.map((item) => (
+                        <DropdownMenuItem
+                          key={item.label}
+                          onClick={item.onClick}
+                        >
+                          {item.label}
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              )}
             </div>
             <ChartContainer
               config={{
